@@ -15,29 +15,28 @@ module ActiveMerchant
       def find_rates(origin, destination, packages, options = {})
         @options.update(options)
         sc_sm = Sendcloud::ShippingMethod.new(@options[:api_key], @options[:api_secret])
+        success = true
         response = []
         sc_sm.list.each do |shipping_method|
           if (shipping_method['countries'].any?{|c| c['iso_2'] == origin.country_code} &&
               shipping_method['countries'].any?{|c| c['iso_2'] == destination.country_code})
-            # shipping_method['countries'].each do |country|
             country_price = 0
             shipping_method['countries'].each {|c| country_price = c['price'] if c['iso_2'] == destination.country_code}
-              response << RateEstimate.new(origin, destination, @@name,
-                                          self.class.name,
-                                          service_code: shipping_method['name'],
-                                          total_price: country_price,
-                                          currency: 'EUR',
-                                          packages: packages,
-                                          delivery_range: ''
-              )
-            # end
+            response << RateEstimate.new(origin, destination, @@name,
+                                        self.class.name,
+                                        service_code: shipping_method['name'],
+                                        total_price: country_price,
+                                        currency: 'EUR',
+                                        packages: packages,
+                                        delivery_range: {}
+            )
           end
         end
         if response.empty?
           success = false
           message = 'No shipping rates could be found for the destination address' if message.blank?
         end
-        RateResponse.new(success, message, nil, rates: response)
+        RateResponse.new(success, message, {}, rates: response)
       end
 
       def create_shipment(origin, destination, packages, options = {})
