@@ -1,4 +1,3 @@
-require 'active_shipping'
 require 'sendcloud'
 
 module ActiveMerchant
@@ -15,10 +14,9 @@ module ActiveMerchant
 
       def find_rates(origin, destination, packages, options = {})
         @options.update(options)
-        packages = Array(packages)
-        sendcloud_auth
+        sc_sm = Sendcloud::ShippingMethod.new(@options[:api_key], @options[:api_secret])
         response = []
-        Sendcloud::ShippingMethod.list.each do |shipping_method|
+        sc_sm.list.each do |shipping_method|
           if (shipping_method['countries'].any?{|c| c['iso_3'] == origin.country_code} &&
               shipping_method['countries'].any?{|c| c['iso_3'] == destination.country_code})
             shipping_method['countries'].each do |country|
@@ -41,8 +39,8 @@ module ActiveMerchant
       end
 
       def create_shipment(origin, destination, packages, options = {})
-        sendcloud_auth
-        Sendcloud::ParcelResource.create_parcel(options['name'], destination, {id: packages['id'], name: packages['name']})
+        sc_pr = Sendcloud::ParcelResource.new(@options[:api_key], @options[:api_secret])
+        sc_pr.create_parcel(options['name'], destination, {id: packages['id'], name: packages['name']})
       end
 
       def maximum_weight
@@ -57,11 +55,11 @@ module ActiveMerchant
                       :phone => '')
       end
 
-      private
-        def sendcloud_auth
-          auth = Sendcloud::Base.new(@options[:api_key], @options[:api_secret])
-          auth
-        end
+      # private
+      #   def sendcloud_auth(class_name)
+      #
+      #     Sendcloud::Base.new(@options[:api_key], @options[:api_secret])
+      #   end
     end
   end
 end
