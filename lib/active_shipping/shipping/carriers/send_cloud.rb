@@ -17,8 +17,8 @@ module ActiveMerchant
         sc_sm = Sendcloud::ShippingMethod.new(@options[:api_key], @options[:api_secret])
         response = []
         sc_sm.list.each do |shipping_method|
-          if (shipping_method['countries'].any?{|c| c['iso_3'] == origin.country_code} &&
-              shipping_method['countries'].any?{|c| c['iso_3'] == destination.country_code})
+          if (shipping_method['countries'].any?{|c| c['iso_2'] == origin.country_code} &&
+              shipping_method['countries'].any?{|c| c['iso_2'] == destination.country_code})
             shipping_method['countries'].each do |country|
               response << RateEstimate.new(origin, destination, @@name,
                                           self.class.name,
@@ -35,7 +35,7 @@ module ActiveMerchant
           success = false
           message = 'No shipping rates could be found for the destination address' if message.blank?
         end
-        RateResponse.new(success, message, nil, rates: response)
+        RateResponse.new(success, message, {}, rates: response)
       end
 
       def create_shipment(origin, destination, packages, options = {})
