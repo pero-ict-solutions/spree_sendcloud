@@ -12,3 +12,17 @@ nbproject
 pkg
 *.swp
 spec/dummy
+
+
+# editors stuff
+*.swp
+*.swo
+*.sublime-workspace
+*.idea
+.idea/**
+.project
+.idea
+
+
+.ruby-gemset
+.ruby-version
