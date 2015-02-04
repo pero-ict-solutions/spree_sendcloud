@@ -15,20 +15,21 @@ module ActiveMerchant
       def find_rates(origin, destination, packages, options = {})
         @options.update(options)
         sc_sm = Sendcloud::ShippingMethod.new(@options[:api_key], @options[:api_secret])
+        success = true
         response = []
         sc_sm.list.each do |shipping_method|
           if (shipping_method['countries'].any?{|c| c['iso_2'] == origin.country_code} &&
               shipping_method['countries'].any?{|c| c['iso_2'] == destination.country_code})
-            shipping_method['countries'].each do |country|
+            country_price = 0
+            shipping_method['countries'].each {|c| country_price = c['price'] if c['iso_2'] == destination.country_code}
               response << RateEstimate.new(origin, destination, @@name,
                                           self.class.name,
                                           service_code: shipping_method['name'],
-                                          total_price: country['price'],
+                                          total_price: country_price,
                                           currency: 'EUR',
                                           packages: packages,
-                                          delivery_range: ''
+                                          delivery_range: {}
               )
-            end
           end
         end
         if response.empty?

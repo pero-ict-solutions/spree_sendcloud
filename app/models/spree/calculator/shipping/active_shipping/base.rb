@@ -73,7 +73,7 @@ module Spree
             response = carrier.find_rates(origin, destination, shipment_packages)
             # turn this beastly array into a nice little hash
             rates = response.rates.collect do |rate|
-              service_name = rate.service_name.encode("UTF-8")
+              service_name = rate.service_code.encode("UTF-8")
               [CGI.unescapeHTML(service_name), rate.price]
             end
             rate_hash = Hash[*rates.flatten]
