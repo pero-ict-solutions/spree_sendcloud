@@ -14,9 +14,30 @@ module ActiveMerchant
       end
 
       def find_rates(origin, destination, packages, options = {})
-        options = @options.update(options)
-        packages = packages
-        build_rate_request(origin, destination)
+        @options.update(options)
+        packages = Array(packages)
+        sendcloud_auth
+        response = []
+        Sendcloud::ShippingMethod.list.each do |shipping_method|
+          if (shipping_method['countries'].any?{|c| c['iso_3'] == origin.country_code} &&
+              shipping_method['countries'].any?{|c| c['iso_3'] == destination.country_code})
+            shipping_method['countries'].each do |country|
+              response << RateEstimate.new(origin, destination, @@name,
+                                          self.class.name,
+                                          service_code: shipping_method['name'],
+                                          total_price: country['price'],
+                                          currency: 'EUR',
+                                          packages: packages,
+                                          delivery_range: ''
+              )
+            end
+          end
+        end
+        if response.empty?
+          success = false
+          message = 'No shipping rates could be found for the destination address' if message.blank?
+        end
+        RateResponse.new(success, message, nil, rates: response)
       end
 
       def create_shipment(origin, destination, packages, options = {})
@@ -40,21 +61,6 @@ module ActiveMerchant
         def sendcloud_auth
           auth = Sendcloud::Base.new(@options[:api_key], @options[:api_secret])
           auth
-        end
-
-        def build_rate_request(origin, destination)
-          sendcloud_auth
-          request = []
-          Sendcloud::ShippingMethod.list.each do |shipping_method|
-            if shipping_method['countries'].include?(origin.country) &&
-                shipping_method['countries'].include?(destination.country)
-              request << Hash.new(id: shipping_method['id'],
-                                name: shipping_method['name'],
-                                price: country['price']
-              )
-            end
-          end
-          request
         end
     end
   end
