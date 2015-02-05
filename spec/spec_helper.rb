@@ -86,3 +86,17 @@ RSpec.configure do |config|
   config.fail_fast = ENV['FAIL_FAST'] || false
   config.order = "random"
 end
+
+require 'capybara-webkit'
+Capybara.javascript_driver = ENV['USE_SELENIUM_FOR_CAPYBARA'] ? :selenium : :webkit
+
+
+# Add VCR support.
+require 'vcr'
+require 'webmock/rspec'
+
+VCR.configure do |config|
+  config.cassette_library_dir = 'spec/vcr_cassettes'
+  config.hook_into :webmock
+  config.ignore_localhost = true
+end
