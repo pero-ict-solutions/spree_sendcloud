@@ -23,21 +23,27 @@ module ActiveMerchant
     context 'get' do
       context 'find rates' do
         it 'with valid params' do
-          carrier = SendCloud.new(api_key: 'D74gAPTNto4N28N', api_secret: 'Yb6m0YVBXtWm2zTdk')
-          response = carrier.find_rates(@location, @location, nil)
-          expect(response.rates).not_to be_empty
+          VCR.use_cassette(:find_rate_valid_params) do
+            carrier = SendCloud.new(api_key: 'D74gAPTNto4N28N', api_secret: 'Yb6m0YVBXtWm2zTdk')
+            response = carrier.find_rates(@location, @location, nil)
+            expect(response.rates).not_to be_empty
+          end
         end
 
         it 'with invalid destination' do
-          carrier = SendCloud.new(api_key: 'D74gAPTNto4N28N', api_secret: 'Yb6m0YVBXtWm2zTdk')
-          expect {carrier.find_rates(@location, @fail_location, nil)}.
-              to raise_error(ActiveMerchant::Shipping::ResponseError)
+          VCR.use_cassette(:find_rate_invalid_destination) do
+            carrier = SendCloud.new(api_key: 'D74gAPTNto4N28N', api_secret: 'Yb6m0YVBXtWm2zTdk')
+            expect {carrier.find_rates(@location, @fail_location, nil)}.
+                to raise_error(ActiveMerchant::Shipping::ResponseError)
+          end
         end
 
         it 'with invalid origin' do
-          carrier = SendCloud.new(api_key: 'D74gAPTNto4N28N', api_secret: 'Yb6m0YVBXtWm2zTdk')
-          expect{carrier.find_rates(@fail_location, @location, nil)}.
-              to raise_error(ActiveMerchant::Shipping::ResponseError)
+          VCR.use_cassette(:find_rate_invalid_origin) do
+            carrier = SendCloud.new(api_key: 'D74gAPTNto4N28N', api_secret: 'Yb6m0YVBXtWm2zTdk')
+            expect{carrier.find_rates(@fail_location, @location, nil)}.
+                to raise_error(ActiveMerchant::Shipping::ResponseError)
+          end
         end
       end
     end
@@ -56,14 +62,16 @@ module ActiveMerchant
         }
       end
       it 'with valid params' do
-        carrier = SendCloud.new(api_key: 'D74gAPTNto4N28N', api_secret: 'Yb6m0YVBXtWm2zTdk')
-        response = carrier.create_shipment(@location, @location,
-                                           {id: parcel_options[:package_id],
-                                            name: parcel_options[:package_name]},
-                                           {name: new_parcel['name'],
-                                            shipment_address: new_parcel['shipment_address']}
-            )
-        expect(response).not_to be_empty
+        VCR.use_cassette(:create_shippment_with_valid_params) do
+          carrier = SendCloud.new(api_key: 'D74gAPTNto4N28N', api_secret: 'Yb6m0YVBXtWm2zTdk')
+          response = carrier.create_shipment(@location, @location,
+                                             {id: parcel_options[:package_id],
+                                              name: parcel_options[:package_name]},
+                                             {name: new_parcel['name'],
+                                              shipment_address: new_parcel['shipment_address']}
+              )
+          expect(response).not_to be_empty
+        end
       end
     end
   end
