@@ -1,5 +1,11 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
+---
 en:
-  hello: "Hello world"
+  sendcloud:
+    pakket_nederland: 'Pakket Nederland (PostNL)'
+    pakket_met_handtekening: 'Pakket met handtekening (PostNL)'
+    pakket_naar_buitenland: 'Pakket naar buitenland'
+    verzekerd_verzenden: 'Verzekerd verzenden tot 500 euro (PostNL)'
+    handtekening_voor_ontvangst: 'Handtekening voor ontvangst + alleen huisadres (PostNL)'
+    alleen_huisadres: 'Alleen huisadres (PostNL)'
+    pakjegemak: 'PakjeGemak (PostNL)'
+    brievenpost: 'Brievenpost'
