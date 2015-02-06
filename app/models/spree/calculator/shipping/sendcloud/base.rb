@@ -15,6 +15,30 @@ module Spree
 
           ActiveMerchant::Shipping::SendCloud.new(carrier_details)
         end
+
+        def create_shipment(shipment)
+          order = shipment.order
+          ship_address = order.ship_address
+          address = ::Sendcloud::ShipmentAddress.new(
+              ship_address.address1,
+              ship_address.city,
+              ship_address.zipcode,
+              ship_address.country.name
+          )
+
+          packages = { id: order.number, name: ship_address.full_name }
+          parcel = carrier.create_shipment(nil, nil, packages, shipment_address: address, name: ship_address.full_name)
+
+          shipment.update(sendcloud_parcel_id: parcel['id'],
+                         print_link: parcel['label']['label_printer'],
+                         tracking: parcel['tracking_number']
+          )
+
+          true
+
+        rescue ActiveMerchant::ResponseError
+          false
+        end
       end
     end
   end

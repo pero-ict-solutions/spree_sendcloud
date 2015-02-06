@@ -41,7 +41,13 @@ module ActiveMerchant
 
       def create_shipment(origin, destination, packages, options = {})
         sendcloud_parcel = Sendcloud::ParcelResource.new(@options[:api_key], @options[:api_secret])
-        sendcloud_parcel.create_parcel(options[:name], options[:shipment_address], {id: packages[:id], name: packages[:name]})
+        response = sendcloud_parcel.create_parcel(options[:name], options[:shipment_address], {id: packages[:id], name: packages[:name]})
+        raise ActiveMerchant::ResponseError.new(response) unless response['error'].blank?
+
+        response = sendcloud_parcel.adjust_parcel(response['id'])
+        raise ActiveMerchant::ResponseError.new(response) unless response['error'].blank?
+
+        response
       end
 
       def maximum_weight

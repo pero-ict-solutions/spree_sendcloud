@@ -125,6 +125,25 @@ module ActiveShipping
       end
     end
 
+    # describe "create_shipment" do
+    #   let!(:shipment) { create(:sendcloud_shipment, order: order) }
+    #   let!(:payment) { create(:payment, amount: order.total, order: order, state: :completed) }
+    #   before do
+    #     calc = shipment.shipping_method.calculator
+    #     calc.set_preference(:api_key, 'D74gAPTNto4N28N')
+    #     calc.set_preference(:api_secret, 'Yb6m0YVBXtWm2zTdk')
+    #     calc.save!
+    #   end
+    #
+    #
+    #   it "should set tracking, print_label and sendcloud parcel id" do
+    #     VCR.use_cassette "create shipment" do
+    #       shipment.shipping_method.calculator.create_shipment(shipment)
+    #       expect(shipment.tracking).to change
+    #     end
+    #   end
+    # end
+
     describe "service_name" do
       it "should return description when not defined" do
         calculator.class.service_name.should == calculator.description

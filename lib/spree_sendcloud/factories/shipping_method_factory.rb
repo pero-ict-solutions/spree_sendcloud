@@ -10,6 +10,6 @@ FactoryGirl.define do
       end
     end
 
-    association(:calculator, factory: :sendcloud_shipping_calculator, strategy: :create)
+    association(:calculator, factory: :sendcloud_calculator, strategy: :create)
   end
 end
