@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://D74gAPTNto4N28N:Yb6m0YVBXtWm2zTdk@panel.sendcloud.nl/api/v2/parcels
+    body:
+      encoding: UTF-8
+      string: '{"parcel":{"name":"Rob van den Heuvel","address":"Torenallee","city":"Eindhoven","postal_code":"5617BC","country":"","shipment":{"id":1,"name":"Pakket
+        Nederland (PostNL)"},"requestShipment":false,"telephone":"","email":"","data":[]}}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 06 Feb 2015 11:05:15 GMT
+      Server:
+      - Apache/2.4.7 (Ubuntu)
+      X-Powered-By:
+      - PHP/5.5.9-1ubuntu4.5
+      Set-Cookie:
+      - ci_session=a%3A5%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22a222d0afc3b5bb892461d64658d09741%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A15%3A%22213.184.251.170%22%3Bs%3A10%3A%22user_agent%22%3Bb%3A0%3Bs%3A13%3A%22last_activity%22%3Bi%3A1423220715%3Bs%3A9%3A%22user_data%22%3Bs%3A0%3A%22%22%3B%7D341e6a74258c928cc9f649b0821713ac;
+        expires=Fri, 06-Feb-2015 13:05:15 GMT; Max-Age=7200; path=/
+      Status:
+      - '200'
+      Content-Length:
+      - '415'
+      Vary:
+      - Accept-Encoding
+      Cache-Control:
+      - max-age=0, no-store
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"parcel":{"id":406893,"name":"Rob van den Heuvel","company_name":null,"address":"Torenallee  ","address_divided":{"street":"Torenallee","house_number":null},"city":"Eindhoven","postal_code":"5617BC","telephone":"","email":"","date_created":"06-02-2015
+        12:05:15","reference":"","data":[],"country":{"iso_3":"NLD","iso_2":"NL","name":"Nederland"},"shipment":{"id":1,"name":"Pakket
+        Nederland (PostNL)","options":[]}}}'
+    http_version: 
+  recorded_at: Fri, 06 Feb 2015 11:05:15 GMT
+recorded_with: VCR 2.9.3
