@@ -1,9 +1,9 @@
 SpreeSendcloud
 ==============
 
-[![wercker status](https://app.wercker.com/status/d4be096318eda499819f2a504d683500/m "wercker status")](https://app.wercker.com/project/bykey/d4be096318eda499819f2a504d683500)
+THIS IS WORK IN PROGRESS! NOT SUITABLE FOR PRODUCTION YET!
 
-Introduction goes here.
+[![wercker status](https://app.wercker.com/status/d4be096318eda499819f2a504d683500/m "wercker status")](https://app.wercker.com/project/bykey/d4be096318eda499819f2a504d683500)
 
 Installation
 ------------
@@ -38,4 +38,4 @@ Simply add this require statement to your spec_helper:
 require 'spree_sendcloud/factories'
 ```
 
-Copyright (c) 2015 [name of extension creator], released under the New BSD License
+Copyright (c) 2015 PeRo ICT Solutions, released under the New BSD License

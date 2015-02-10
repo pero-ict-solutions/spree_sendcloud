@@ -91,7 +91,6 @@ describe "Checkout Order With SendCloud", js: true do
 
           expect(page).to have_content('Sendcloud parcel id')
           expect(page).to have_content('Link to print label(Not for public use)')
-          save_and_open_page
         end
 
         it 'and cannot see ship button if it is not paid.' do
