@@ -39,15 +39,23 @@ module ActiveMerchant
         RateResponse.new(success, message, {}, rates: response)
       end
 
-      def create_shipment(origin, destination, packages, options = {})
+      def create_shipment(origin, destination, shipment, options = {})
+        shipment.merge!(id: shipment_method_id_by(shipment[:name]))
         sendcloud_parcel = Sendcloud::ParcelResource.new(@options[:api_key], @options[:api_secret])
-        response = sendcloud_parcel.create_parcel(options[:name], options[:shipment_address], {id: packages[:id], name: packages[:name]})
-        raise ActiveMerchant::ResponseError.new(response) unless response['error'].blank?
+        response = sendcloud_parcel.create_parcel(options[:name], options[:shipment_address], shipment)
 
-        response = sendcloud_parcel.adjust_parcel(response['id'])
-        raise ActiveMerchant::ResponseError.new(response) unless response['error'].blank?
+        sendcloud_parcel.adjust_parcel(response['id'])
+      end
 
-        response
+      def shipment_method_id_by(name)
+        sendcloud_shipping = Sendcloud::ShippingMethod.new(@options[:api_key], @options[:api_secret])
+        shipping_list = sendcloud_shipping.list
+
+        if shipping_list.nil?
+          raise ::Sendcloud::ShippingMethodException.new('Blank shipping list received.')
+        end
+
+        shipping_list.select{ |m| m['name'] == name }.first['id']
       end
 
       def maximum_weight

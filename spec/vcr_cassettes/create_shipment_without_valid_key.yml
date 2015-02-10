@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://WRONG_KEY:WRONG_SECRET@panel.sendcloud.nl/api/v2/shipping_methods
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Date:
+      - Tue, 10 Feb 2015 07:12:20 GMT
+      Server:
+      - Apache/2.4.7 (Ubuntu)
+      X-Powered-By:
+      - PHP/5.5.9-1ubuntu4.5
+      Set-Cookie:
+      - ci_session=a%3A5%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%2286bc85849498976c085eec4cfbfa8804%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A12%3A%22217.21.54.45%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A4%3A%22Ruby%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1423552340%3Bs%3A9%3A%22user_data%22%3Bs%3A0%3A%22%22%3B%7D4a726ca4a048a62900a8b4e024e82719;
+        expires=Tue, 10-Feb-2015 09:12:20 GMT; Max-Age=7200; path=/
+      Status:
+      - '401'
+      Content-Length:
+      - '96'
+      Cache-Control:
+      - max-age=0, no-store
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"error":{"code":401,"request":"api\/v2\/shipping_methods","message":"Authentication
+        required"}}'
+    http_version: 
+  recorded_at: Tue, 10 Feb 2015 07:12:20 GMT
+recorded_with: VCR 2.9.3

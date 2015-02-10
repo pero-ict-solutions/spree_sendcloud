@@ -19,14 +19,14 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 06 Feb 2015 11:04:20 GMT
+      - Tue, 10 Feb 2015 18:53:10 GMT
       Server:
       - Apache/2.4.7 (Ubuntu)
       X-Powered-By:
       - PHP/5.5.9-1ubuntu4.5
       Set-Cookie:
-      - ci_session=a%3A5%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%225d32310efe238b5e5fcba06986848458%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A15%3A%22213.184.251.170%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A4%3A%22Ruby%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1423220660%3Bs%3A9%3A%22user_data%22%3Bs%3A0%3A%22%22%3B%7D185dd80765d1ca4efbddc855f46a10bb;
-        expires=Fri, 06-Feb-2015 13:04:20 GMT; Max-Age=7200; path=/
+      - ci_session=a%3A5%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22335fd3fc1a364d7f28ef150e49df8fb8%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A12%3A%22217.21.54.45%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A4%3A%22Ruby%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1423594390%3Bs%3A9%3A%22user_data%22%3Bs%3A0%3A%22%22%3B%7Df9b55ac00943fc14a8704f16e5e945d1;
+        expires=Tue, 10-Feb-2015 20:53:10 GMT; Max-Age=7200; path=/
       Status:
       - '200'
       Vary:
@@ -51,5 +51,89 @@ http_interactions:
         huisadres (PostNL)"}]},{"id":7,"name":"PakjeGemak (PostNL)","countries":[{"id":2,"iso_3":"NLD","iso_2":"NL","name":"Nederland","price":5.8}],"price":5.8,"options":[],"combinations":[{"id":7,"name":"Pakjegemak"}]},{"id":8,"name":"Brievenpost","countries":[{"id":1,"iso_3":"BEL","iso_2":"BE","name":"Belgie","price":0},{"id":2,"iso_3":"NLD","iso_2":"NL","name":"Nederland","price":0},{"id":3,"iso_3":"DEU","iso_2":"DE","name":"Duitsland","price":0},{"id":4,"iso_3":"BGR","iso_2":"BG","name":"Bulgarije","price":0},{"id":5,"iso_3":"DNK","iso_2":"DK","name":"Denemarken","price":0},{"id":6,"iso_3":"EST","iso_2":"EE","name":"Estland","price":0},{"id":7,"iso_3":"FIN","iso_2":"FI","name":"Finland","price":0},{"id":8,"iso_3":"FRA","iso_2":"FR","name":"Frankrijk","price":0},{"id":9,"iso_3":"GBR","iso_2":"GB","name":"Verenigd
         Koninkrijk","price":0},{"id":10,"iso_3":"HUN","iso_2":"HU","name":"Hongarije","price":0},{"id":11,"iso_3":"IRL","iso_2":"IE","name":"Ierland","price":0},{"id":12,"iso_3":"ITA","iso_2":"IT","name":"Italie","price":0},{"id":13,"iso_3":"LVA","iso_2":"LV","name":"Letland","price":0},{"id":14,"iso_3":"LTU","iso_2":"LT","name":"Litouwen","price":0},{"id":15,"iso_3":"LUX","iso_2":"LU","name":"Luxemburg","price":0},{"id":16,"iso_3":"AUT","iso_2":"AT","name":"Oostenrijk","price":0},{"id":17,"iso_3":"POL","iso_2":"PL","name":"Polen","price":0},{"id":18,"iso_3":"PRT","iso_2":"PT","name":"Portugal","price":0},{"id":19,"iso_3":"ROU","iso_2":"RO","name":"Roemenie","price":0},{"id":20,"iso_3":"SVN","iso_2":"SI","name":"Slovenie","price":0},{"id":21,"iso_3":"SVK","iso_2":"SK","name":"Slowakije","price":0},{"id":22,"iso_3":"ESP","iso_2":"ES","name":"Spanje","price":0},{"id":23,"iso_3":"CZE","iso_2":"CZ","name":"Tsjechie","price":0},{"id":24,"iso_3":"SWE","iso_2":"SE","name":"Zweden","price":0},{"id":25,"iso_3":"GRC","iso_2":"GR","name":"Griekenland","price":0}],"price":0,"options":[],"combinations":[{"id":14,"name":"Brievenpost"}]}]}'
     http_version: 
-  recorded_at: Fri, 06 Feb 2015 11:04:20 GMT
+  recorded_at: Tue, 10 Feb 2015 18:53:11 GMT
+- request:
+    method: post
+    uri: https://TEST_KEY:TEST_SECRET@panel.sendcloud.nl/api/v2/parcels
+    body:
+      encoding: UTF-8
+      string: '{"parcel":{"name":"Test User","address":"1 User Lane","city":"Amsterdam","postal_code":"1051KN","country":"NL","shipment":{"name":"Pakket
+        Nederland (PostNL)","option":[],"id":1},"requestShipment":false,"telephone":"","email":"","data":[]}}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 10 Feb 2015 18:53:11 GMT
+      Server:
+      - Apache/2.4.7 (Ubuntu)
+      X-Powered-By:
+      - PHP/5.5.9-1ubuntu4.5
+      Set-Cookie:
+      - ci_session=a%3A5%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22dd2b76911d1497aee185b0e74f6fa5d9%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A12%3A%22217.21.54.45%22%3Bs%3A10%3A%22user_agent%22%3Bb%3A0%3Bs%3A13%3A%22last_activity%22%3Bi%3A1423594391%3Bs%3A9%3A%22user_data%22%3Bs%3A0%3A%22%22%3B%7Df74ebbb67da8b0e8eaeedcd0a34e5770;
+        expires=Tue, 10-Feb-2015 20:53:11 GMT; Max-Age=7200; path=/
+      Status:
+      - '200'
+      Content-Length:
+      - '408'
+      Vary:
+      - Accept-Encoding
+      Cache-Control:
+      - max-age=0, no-store
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"parcel":{"id":412123,"name":"Test User","company_name":null,"address":"1
+        User Lane  ","address_divided":{"street":"1 User Lane","house_number":null},"city":"Amsterdam","postal_code":"1051KN","telephone":"","email":"","date_created":"10-02-2015
+        19:53:11","reference":"","data":[],"country":{"iso_3":"NLD","iso_2":"NL","name":"Nederland"},"shipment":{"id":1,"name":"Pakket
+        Nederland (PostNL)","options":[]}}}'
+    http_version: 
+  recorded_at: Tue, 10 Feb 2015 18:53:11 GMT
+- request:
+    method: put
+    uri: https://TEST_KEY:TEST_SECRET@panel.sendcloud.nl/api/v2/parcels
+    body:
+      encoding: UTF-8
+      string: '{"parcel":{"id":412123,"requestShipment":true}}'
+    headers:
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 10 Feb 2015 18:53:11 GMT
+      Server:
+      - Apache/2.4.7 (Ubuntu)
+      X-Powered-By:
+      - PHP/5.5.9-1ubuntu4.5
+      Set-Cookie:
+      - ci_session=a%3A5%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22e8cfc1148c75425865f37cca526fc66c%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A12%3A%22217.21.54.45%22%3Bs%3A10%3A%22user_agent%22%3Bb%3A0%3Bs%3A13%3A%22last_activity%22%3Bi%3A1423594391%3Bs%3A9%3A%22user_data%22%3Bs%3A0%3A%22%22%3B%7D0f5f7e0cb200ef69e0c006b6c14d4259;
+        expires=Tue, 10-Feb-2015 20:53:11 GMT; Max-Age=7200; path=/
+      Status:
+      - '200'
+      Content-Length:
+      - '1198'
+      Vary:
+      - Accept-Encoding
+      Cache-Control:
+      - max-age=0, no-store
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"parcel":{"id":412123,"name":"Test User","company_name":null,"address":"1
+        User Lane  ","address_divided":{"street":"1 User Lane","house_number":null},"city":"Amsterdam","postal_code":"1051KN","telephone":"","email":"","date_created":"10-02-2015
+        19:53:11","reference":"","tracking_number":"3SYZXG154194165","label":{"normal_printer":["https:\/\/panel.sendcloud.nl\/api\/v2\/labels\/normal_printer\/412123?start_from=0&hash=8988716489a7d38e03452d27c5c3bdbb92d1ca91","https:\/\/panel.sendcloud.nl\/api\/v2\/labels\/normal_printer\/412123?start_from=1&hash=8988716489a7d38e03452d27c5c3bdbb92d1ca91","https:\/\/panel.sendcloud.nl\/api\/v2\/labels\/normal_printer\/412123?start_from=2&hash=8988716489a7d38e03452d27c5c3bdbb92d1ca91","https:\/\/panel.sendcloud.nl\/api\/v2\/labels\/normal_printer\/412123?start_from=3&hash=8988716489a7d38e03452d27c5c3bdbb92d1ca91"],"label_printer":"https:\/\/panel.sendcloud.nl\/api\/v2\/labels\/label_printer\/412123?hash=8988716489a7d38e03452d27c5c3bdbb92d1ca91"},"status":{"id":0,"message":"Gereed
+        voor verzending","history":null},"data":[],"country":{"iso_3":"NLD","iso_2":"NL","name":"Nederland"},"shipment":{"id":1,"name":"Pakket
+        Nederland (PostNL)","options":[]}}}'
+    http_version: 
+  recorded_at: Tue, 10 Feb 2015 18:53:12 GMT
 recorded_with: VCR 2.9.3

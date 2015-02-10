@@ -23,20 +23,18 @@ module Spree
               ship_address.address1,
               ship_address.city,
               ship_address.zipcode,
-              ship_address.country.name
+              ship_address.country.iso
           )
 
-          packages = { id: order.number, name: ship_address.full_name }
-          parcel = carrier.create_shipment(nil, nil, packages, shipment_address: address, name: ship_address.full_name)
+          shipment_hash = { name: self.class.description, option: [] }
+          parcel = carrier.create_shipment(nil, nil, shipment_hash, shipment_address: address, name: ship_address.full_name)
 
-          shipment.update(sendcloud_parcel_id: parcel['id'],
-                         print_link: parcel['label']['label_printer'],
-                         tracking: parcel['tracking_number']
-          )
+          shipment.sendcloud_parcel_id = parcel['id']
+          shipment.print_link = parcel['label']['label_printer']
+          shipment.tracking = parcel['tracking_number']
+          shipment.save!
 
-          true
-
-        rescue ActiveMerchant::ResponseError
+        rescue ::Sendcloud::ParcelResourceException, ::Sendcloud::ShippingMethodException
           false
         end
       end

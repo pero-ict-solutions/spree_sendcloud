@@ -9,3 +9,8 @@ en:
     alleen_huisadres: 'Alleen huisadres (PostNL)'
     pakjegemak: 'PakjeGemak (PostNL)'
     brievenpost: 'Brievenpost'
+  spree:
+    sendcloud_parcel_id: 'Sendcloud parcel id'
+    print_link: 'Link to print label(Not for public use)'
+    no_sendcloud_parcel_present: 'No sendcloud parcel present.'
+    no_print_link_present: 'No print link present.'
