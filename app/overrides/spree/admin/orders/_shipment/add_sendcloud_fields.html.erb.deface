@@ -1,0 +1,23 @@
+<!-- insert_after "tr.show-tracking" -->
+
+    <% if shipment.is_sendcloud? %>
+        <tr class="show-parcel-id">
+          <td colspan="6" class="sendcloud-parcel-id">
+            <% if shipment.sendcloud_parcel_id.present? %>
+                <strong><%= Spree.t(:sendcloud_parcel_id) %>:</strong> <%= shipment.sendcloud_parcel_id %>
+            <% else %>
+                <%= Spree.t(:no_sendcloud_parcel_present) %>
+            <% end %>
+          </td>
+        </tr>
+        <tr class="show-print-link">
+          <td colspan="6" class="print-link">
+            <% if shipment.print_link.present? %>
+                <strong><%= Spree.t(:print_link) %>:</strong> <%= shipment.print_link_with_auth_params %>
+            <% else %>
+                <%= Spree.t(:no_print_link_present) %>
+            <% end %>
+          </td>
+        </tr>
+     <% end %>
+     

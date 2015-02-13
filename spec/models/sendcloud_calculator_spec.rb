@@ -5,6 +5,13 @@ module ActiveShipping
   describe Spree::Calculator::Shipping::Sendcloud::Base do
     WebMock.disable_net_connect!
 
+    def set_keys(shipment, key, secret)
+      calc = shipment.shipping_method.calculator
+      calc.set_preference(:api_key, key)
+      calc.set_preference(:api_secret, secret)
+      calc.save!
+    end
+
     let(:address) { FactoryGirl.create(:address) }
     let(:stock_location) { FactoryGirl.create(:stock_location) }
     let!(:order) do
@@ -121,6 +128,35 @@ module ActiveShipping
           calculator.class.should_receive(:description).and_return("Extra-Super Fast")
           rate = calculator.compute(package)
           rate.should be_nil
+        end
+      end
+    end
+
+    describe "create_shipment" do
+      let!(:shipment) { create(:sendcloud_shipment, order: order) }
+      let!(:payment) { create(:payment, amount: order.total, order: order, state: :completed) }
+      before do
+        country = Spree::Country.last
+        country.update!(iso: 'NL', name: 'Netherlands')
+        state = Spree::State.last
+        state.update!(name: 'Noord-Holland')
+        shipment.order.ship_address.update(zipcode: '5617BC', city: 'Eindhoven')
+      end
+
+      it "should set tracking, print_label and sendcloud parcel id" do
+        set_keys(shipment, 'TEST_KEY', 'TEST_SECRET')
+        VCR.use_cassette "create shipment" do
+          shipment.shipping_method.calculator.create_shipment(shipment)
+          expect(shipment.tracking).to eql('3SYZXG114161295')
+          expect(shipment.print_link).to eql('https://panel.sendcloud.nl/api/v2/labels/label_printer/410656?hash=70286456cab252a543dae6be5037592a4d8c6e40')
+          expect(shipment.sendcloud_parcel_id).to eql(410656)
+        end
+      end
+
+      it "should return false when bad api key is provided" do
+        set_keys(shipment, 'WRONG_KEY', 'WRONG_SECRET')
+        VCR.use_cassette "create shipment without valid key" do
+          expect(shipment.shipping_method.calculator.create_shipment(shipment)).to eq(false)
         end
       end
     end

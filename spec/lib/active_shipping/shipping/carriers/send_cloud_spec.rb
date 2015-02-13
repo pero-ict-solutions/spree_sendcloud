@@ -24,7 +24,7 @@ module ActiveMerchant
       context 'find rates' do
         it 'with valid params' do
           VCR.use_cassette(:find_rate_valid_params) do
-            carrier = SendCloud.new(api_key: 'D74gAPTNto4N28N', api_secret: 'Yb6m0YVBXtWm2zTdk')
+            carrier = SendCloud.new(api_key: 'TEST_KEY', api_secret: 'TEST_SECRET')
             response = carrier.find_rates(@location, @location, nil)
             expect(response.rates).not_to be_empty
           end
@@ -32,7 +32,7 @@ module ActiveMerchant
 
         it 'with invalid destination' do
           VCR.use_cassette(:find_rate_invalid_destination) do
-            carrier = SendCloud.new(api_key: 'D74gAPTNto4N28N', api_secret: 'Yb6m0YVBXtWm2zTdk')
+            carrier = SendCloud.new(api_key: 'TEST_KEY', api_secret: 'TEST_SECRET')
             expect {carrier.find_rates(@location, @fail_location, nil)}.
                 to raise_error(ActiveMerchant::Shipping::ResponseError)
           end
@@ -40,7 +40,7 @@ module ActiveMerchant
 
         it 'with invalid origin' do
           VCR.use_cassette(:find_rate_invalid_origin) do
-            carrier = SendCloud.new(api_key: 'D74gAPTNto4N28N', api_secret: 'Yb6m0YVBXtWm2zTdk')
+            carrier = SendCloud.new(api_key: 'TEST_KEY', api_secret: 'TEST_SECRET')
             expect{carrier.find_rates(@fail_location, @location, nil)}.
                 to raise_error(ActiveMerchant::Shipping::ResponseError)
           end
@@ -63,7 +63,7 @@ module ActiveMerchant
       end
       it 'with valid params' do
         VCR.use_cassette(:create_shippment_with_valid_params) do
-          carrier = SendCloud.new(api_key: 'D74gAPTNto4N28N', api_secret: 'Yb6m0YVBXtWm2zTdk')
+          carrier = SendCloud.new(api_key: 'TEST_KEY', api_secret: 'TEST_SECRET')
           response = carrier.create_shipment(@location, @location,
                                              {id: parcel_options[:package_id],
                                               name: parcel_options[:package_name]},
