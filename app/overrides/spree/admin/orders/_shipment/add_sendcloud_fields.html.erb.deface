@@ -13,11 +13,10 @@
         <tr class="show-print-link">
           <td colspan="6" class="print-link">
             <% if shipment.print_link.present? %>
-                <strong><%= Spree.t(:print_link) %>:</strong> <%= shipment.print_link_with_auth_params %>
+                <strong><%= Spree.t(:print_link) %>:</strong> <%= link_to Spree.t(:shipping_label), shipment.print_link_with_auth_params, target: "_blank" %>
             <% else %>
                 <%= Spree.t(:no_print_link_present) %>
             <% end %>
           </td>
         </tr>
      <% end %>
-     
