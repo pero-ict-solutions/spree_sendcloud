@@ -14,3 +14,4 @@ en:
     print_link: 'Link to print label(Not for public use)'
     no_sendcloud_parcel_present: 'No sendcloud parcel present.'
     no_print_link_present: 'No print link present.'
+    shipping_label: "Shipping label"
