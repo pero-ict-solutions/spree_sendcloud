@@ -33,9 +33,6 @@ module Spree
           shipment.print_link = parcel['label']['label_printer']
           shipment.tracking = parcel['tracking_number']
           shipment.save!
-
-        rescue ::Sendcloud::ParcelResourceException, ::Sendcloud::ShippingMethodException
-          false
         end
       end
     end

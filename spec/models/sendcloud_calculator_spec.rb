@@ -156,7 +156,9 @@ module ActiveShipping
       it "should return false when bad api key is provided" do
         set_keys(shipment, 'WRONG_KEY', 'WRONG_SECRET')
         VCR.use_cassette "create shipment without valid key" do
-          expect(shipment.shipping_method.calculator.create_shipment(shipment)).to eq(false)
+          expect{
+            shipment.shipping_method.calculator.create_shipment(shipment)
+          }.to raise_error
         end
       end
     end
