@@ -18,8 +18,6 @@ module Spree
           is_package_shippable?(package)
 
           !compute(package).nil?
-        rescue Spree::ShippingError
-          false
         end
 
         def compute_package(package)
@@ -31,7 +29,7 @@ module Spree
 
           rates_result = retrieve_rates_from_cache(package, origin, destination)
 
-          return nil if rates_result.kind_of?(Spree::ShippingError)
+          raise rates_result if rates_result.kind_of?(Spree::ShippingError)
           return nil if rates_result.empty?
           rate = rates_result[self.class.description]
 
