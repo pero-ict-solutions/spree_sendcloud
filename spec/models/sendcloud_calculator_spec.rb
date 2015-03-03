@@ -59,7 +59,7 @@ module ActiveShipping
     describe "available" do
       context "when rates are available" do
         let(:rates) do
-          [ double('rate', :service_name => 'Pakket Nederland (PostNL)', :service_code => "Pakket Nederland (PostNL)", :price => 1) ]
+          [ double('rate', :service_name => 'PostNL Nederland', :service_code => "PostNL Nederland", :price => 1) ]
         end
 
         before do
@@ -111,7 +111,7 @@ module ActiveShipping
 
     describe "compute" do
       let(:rates) do
-        [ double('rate', :service_name => 'Pakket Nederland (PostNL)', :service_code => "Pakket Nederland (PostNL)", :price => 999) ]
+        [ double('rate', :service_name => 'PostNL Nederland', :service_code => "PostNL Nederland", :price => 999) ]
       end
 
       context "with valid response" do
