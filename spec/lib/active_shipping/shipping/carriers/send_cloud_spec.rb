@@ -52,7 +52,7 @@ module ActiveMerchant
       let!(:parcel_options) do
         {
             package_id: 1,
-            package_name: 'Pakket Nederland (PostNL)'
+            package_name: 'PostNL Nederland'
         }
       end
       let!(:new_parcel) do

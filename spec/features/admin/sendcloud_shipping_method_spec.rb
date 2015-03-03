@@ -19,9 +19,9 @@ describe "SendCloud Shipping Method", js: true do
       it "should be able to create a new shipping method and set api key for it" do
         click_link 'admin_new_shipping_method_link'
         expect(page).to have_content("New Shipping Method ")
-        fill_in "shipping_method_name", with: "Pakket Nederland (PostNL)"
+        fill_in "shipping_method_name", with: "PostNL Nederland"
         within(".categories"){ check('My category') }
-        select "Pakket Nederland (PostNL)", from: "calc_type"
+        select "PostNL Nederland", from: "calc_type"
         click_button "Create"
         expect(page).to have_content("successfully created!")
 

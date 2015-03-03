@@ -4,7 +4,7 @@ describe "Checkout Order With SendCloud", js: true do
 
   let!(:product) { create(:product, :name => 'iPad') }
   let!(:calculator) { create(:sendcloud_calculator, preferences: {api_key: 'TEST_KEY', api_secret: 'TEST_SECRET'}) }
-  let!(:shipping_method) { create(:sendcloud_shipping_method, name: 'Pakket Nederland (PostNL)', calculator: calculator) }
+  let!(:shipping_method) { create(:sendcloud_shipping_method, name: 'PostNL Nederland', calculator: calculator) }
   let!(:payment_method) { create(:check_payment_method)}
 
   before do
@@ -49,12 +49,12 @@ describe "Checkout Order With SendCloud", js: true do
   end
 
 
-  context 'User goes to delivery step and able to choose Pakket Nederland (PostNL)' do
+  context 'User goes to delivery step and able to choose PostNL Nederland' do
     before do
       VCR.use_cassette 'sendcloud api call' do
         prepare_order_for_delivery
         wait_for_ajax
-        expect(page).to have_content("Pakket Nederland (PostNL)")
+        expect(page).to have_content("PostNL Nederland")
       end
     end
 
@@ -64,7 +64,7 @@ describe "Checkout Order With SendCloud", js: true do
         # Payment step doesn't require any action
         click_button "Save and Continue"
         expect(page).to have_content("Your order has been processed successfully")
-        expect(Spree::Order.first.shipments.last.shipping_method.name).to eql 'Pakket Nederland (PostNL)'
+        expect(Spree::Order.first.shipments.last.shipping_method.name).to eql 'PostNL Nederland'
       end
 
       context 'Admin visits shipments page' do

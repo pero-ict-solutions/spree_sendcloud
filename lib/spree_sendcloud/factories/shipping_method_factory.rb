@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :sendcloud_shipping_method, class: Spree::ShippingMethod do
     zones { |a| [Spree::Zone.global] }
-    name 'Pakket Nederland (PostNL)'
-    code 'Pakket Nederland (PostNL)'
+    name 'PostNL Nederland'
+    code 'PostNL Nederland'
 
     before(:create) do |shipping_method, evaluator|
       if shipping_method.shipping_categories.empty?
