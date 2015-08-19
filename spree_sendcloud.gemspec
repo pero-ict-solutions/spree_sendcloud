@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'spree_core', '~> 3.1.0.beta'
-  s.add_dependency 'active_shipping'
+  s.add_dependency 'active_shipping', '0.12.5'
   s.add_dependency 'sendcloud-ruby', '1.0.0'
 
   s.add_development_dependency 'capybara', '~> 2.4'
