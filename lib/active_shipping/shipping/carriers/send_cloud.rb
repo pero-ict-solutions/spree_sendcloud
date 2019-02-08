@@ -18,8 +18,7 @@ module ActiveMerchant
         success = true
         response = []
         sendcloud_shipping.list.each do |shipping_method|
-          if (shipping_method['countries'].any?{|c| c['iso_2'] == origin.country_code} &&
-              shipping_method['countries'].any?{|c| c['iso_2'] == destination.country_code})
+          if shipping_method['countries'].any?{|c| c['iso_2'] == destination.country_code}
             country_price = 0
             shipping_method['countries'].each {|c| country_price = c['price'] if c['iso_2'] == destination.country_code}
             response << RateEstimate.new(origin, destination, @@name,

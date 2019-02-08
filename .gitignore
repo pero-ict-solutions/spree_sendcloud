@@ -26,3 +26,5 @@ spec/dummy
 
 .ruby-gemset
 .ruby-version
+
+*.gem
