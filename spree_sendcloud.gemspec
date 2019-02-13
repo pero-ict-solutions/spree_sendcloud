@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_sendcloud'
-  s.version     = '3.0.0.beta'
+  s.version     = '3.0.1.beta'
   s.summary     = 'Use Sendcloud shipping for your SpreeCommerce storefront'
   s.description = s.summary
   s.required_ruby_version = '>= 2.0.0'
